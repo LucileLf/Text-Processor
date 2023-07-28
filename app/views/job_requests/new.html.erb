@@ -1,5 +1,6 @@
 <%= simple_form_for @job_request do |form| %>
-  <%= form.input :text_file, as: :file, label: 'Select a file' %>
-  <%# <%= form.input :job, as: :collection:  %> %>
+  <%= form.file_field :text_file, label: 'Select a file' %>
+  <%= form.input :job, collection: Job.all %>
+  <%= form.input :deadline, as: :date %>
   <%= form.submit %>
 <% end %>

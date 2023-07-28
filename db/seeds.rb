@@ -13,3 +13,7 @@ User.create!(
   email: "lucile.c.lefebvre@gmail.com",
   password: "123456"
 )
+
+Job.create!(
+  name: "Word count"
+)
