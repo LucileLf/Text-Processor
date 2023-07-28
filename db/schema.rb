@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_114735) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_122329) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "job_requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "text_file_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["text_file_id"], name: "index_job_requests_on_text_file_id"
+    t.index ["user_id"], name: "index_job_requests_on_user_id"
+  end
+
+  create_table "text_files", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_text_files_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +38,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_114735) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "job_requests", "text_files"
+  add_foreign_key "job_requests", "users"
+  add_foreign_key "text_files", "users"
 end
