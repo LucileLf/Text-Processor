@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_143049) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_29_175139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,8 +47,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_143049) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "job_id"
-    t.string "status", default: "initiated", null: false
+    t.string "status"
     t.date "deadline"
+    t.text "results"
     t.index ["job_id"], name: "index_job_requests_on_job_id"
     t.index ["text_file_id"], name: "index_job_requests_on_text_file_id"
   end
@@ -64,6 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_143049) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "format"
+    t.text "text_content"
     t.index ["user_id"], name: "index_text_files_on_user_id"
   end
 

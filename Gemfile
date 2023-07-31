@@ -53,6 +53,13 @@ gem "devise"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
+gem 'rack', '~> 2.2', '>= 2.2.4'
+gem 'pdf-reader'
+gem 'open-uri'
+gem 'nokogiri'
+#gem 'combine_pdf'
+gem 'httparty'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -2,6 +2,8 @@
 <% @job_requests.each do |jr| %>
   <p><%= jr.job.name %> on <%= jr.text_file.name %></p>
   <p>Status: <%= jr.status %></p>
+  <p> <%= jr.text_file.text_content %></p>
+  <p> <%= jr.results %></p>
 <% end %>
 
 <%= link_to "Submit a new job request", new_job_request_path %>

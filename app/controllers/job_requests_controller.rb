@@ -12,11 +12,13 @@ class JobRequestsController < ApplicationController
   def create
     @job_request = JobRequest.new(job_request_params)
     @job_request.job = Job.find(params[:job_request][:job])
-    @text_file = TextFile.new(file: params[:job_request][:text_file], user: current_user)
-    @text_file.name = params[:job_request][:text_file].original_filename
+    @text_file = TextFile.create!(file: params[:job_request][:text_file], user: current_user, name: params[:job_request][:text_file].original_filename)
     @job_request.text_file = @text_file
     @job_request.status = "initiated"
     if @job_request.save!
+      #change date of execution
+      #CountWordsJob.set(wait_until: Date.tomorrow.noon).perform_later(@text_content)
+      CountWordsJob.perform_now(@text_file)
       redirect_to job_requests_path
     else
       render :new, status: :unprocessable_entity
